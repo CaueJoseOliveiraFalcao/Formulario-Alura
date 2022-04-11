@@ -79,5 +79,31 @@
             </form>
         </section>
     </main>
+    <script src="./assets/js/validacao.js"></script>
 </body>
 </html>
+const dataNascimento = document.querySelector("#nascimento")
+console.log('nacimento')
+
+dataNascimento.addEventListener('blur', (evento) => {
+    console.log('evento')
+    valida_data_nascimento(evento.target)
+    
+})
+
+function valida_data_nascimento(input){
+    const data_recebida = new Date(input.value)
+    let mensagem = ''
+
+    if (!maior_18(data_recebida)){
+        mensagem = 'Você deve ser maior que 18 anos para se cadastrar'
+    }
+    
+    input.setCustomValidity(mensagem)
+}
+function maior_18(data){
+    const data_atual = new Date()
+    const data_mais18 = Date(data.getUTCFullYear() + 18 , data.getUTCMonth(),data.getUTCDate())
+
+    return data_mais18 <= data_atual
+}
